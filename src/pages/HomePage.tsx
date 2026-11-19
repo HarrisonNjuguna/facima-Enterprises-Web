@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BodyTypeBrowse } from '../components/BodyTypeBrowse'
+import { StockQuickFilters } from '../components/StockQuickFilters'
 import { CarCard } from '../components/CarCard'
 import { FinanceTeaser } from '../components/FinanceTeaser'
 import { GetInTouch } from '../components/GetInTouch'
@@ -76,7 +77,8 @@ export function HomePage() {
               View all →
             </Link>
           </header>
-          <div className="car-grid">
+          <StockQuickFilters />
+          <div className="car-grid car-grid--market">
             {featured.map((car) => (
               <CarCard key={car.id} car={car} />
             ))}
@@ -97,7 +99,7 @@ export function HomePage() {
               See all →
             </Link>
           </header>
-          <div className="car-grid">
+          <div className="car-grid car-grid--market">
             {localUsed.map((car) => (
               <CarCard key={car.id} car={car} />
             ))}
@@ -116,7 +118,7 @@ export function HomePage() {
               Browse imports →
             </Link>
           </header>
-          <div className="car-grid">
+          <div className="car-grid car-grid--market">
             {foreignNew.map((car) => (
               <CarCard key={car.id} car={car} />
             ))}

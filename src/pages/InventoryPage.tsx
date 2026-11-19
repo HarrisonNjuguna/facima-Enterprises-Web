@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { CarCard } from '../components/CarCard'
 import { FilterPanel } from '../components/FilterPanel'
+import { StockQuickFilters } from '../components/StockQuickFilters'
 import { useCars } from '../context/CarContext'
 import { defaultFilters, filterCars } from '../utils/filterCars'
 import type { CarFilters } from '../types/car'
@@ -24,6 +25,7 @@ export function InventoryPage() {
       stockType: params.get('stockType') ?? '',
     }))
   }, [params])
+
   const [sort, setSort] = useState<'newest' | 'price-asc' | 'price-desc' | 'mileage'>(
     'newest',
   )
@@ -48,50 +50,63 @@ export function InventoryPage() {
   }, [filtered, sort])
 
   return (
-    <div className="section container inventory-layout">
-      <header className="page-header">
-        <h1>Vehicle inventory</h1>
-        <p className="muted">
-          {sorted.length} listing{sorted.length === 1 ? '' : 's'} — updated from
-          the Facima yard and admin uploads.
-        </p>
-      </header>
-      <FilterPanel
-        filters={filters}
-        onChange={(patch) => setFilters((f) => ({ ...f, ...patch }))}
-        onReset={() => setFilters(defaultFilters)}
-      />
-      <div className="inventory-main">
-        <div className="inventory-toolbar">
-          <label className="field field--inline">
-            <span>Sort by</span>
-            <select value={sort} onChange={(e) => setSort(e.target.value as typeof sort)}>
-              <option value="newest">Newest listed</option>
-              <option value="price-asc">Price: low to high</option>
-              <option value="price-desc">Price: high to low</option>
-              <option value="mileage">Lowest mileage</option>
-            </select>
-          </label>
-        </div>
-        {sorted.length === 0 ? (
-          <p className="empty-state">
-            No vehicles match your filters.{' '}
-            <button
-              type="button"
-              className="btn btn--ghost"
-              onClick={() => setFilters(defaultFilters)}
-            >
-              Reset filters
-            </button>
+    <>
+      <div className="inventory-hero band band--soft">
+        <div className="container section-inner">
+          <p className="eyebrow">Marketplace</p>
+          <h1>Vehicle inventory</h1>
+          <p className="muted page-header__lead">
+            {sorted.length} verified listing{sorted.length === 1 ? '' : 's'} — Kenyan
+            used, imports, and brand new stock at Facima Enterprises.
           </p>
-        ) : (
-          <div className="car-grid">
-            {sorted.map((car) => (
-              <CarCard key={car.id} car={car} />
-            ))}
-          </div>
-        )}
+          <StockQuickFilters />
+        </div>
       </div>
-    </div>
+      <div className="section container inventory-layout">
+        <FilterPanel
+          filters={filters}
+          onChange={(patch) => setFilters((f) => ({ ...f, ...patch }))}
+          onReset={() => setFilters(defaultFilters)}
+        />
+        <div className="inventory-main">
+          <div className="inventory-toolbar">
+            <label className="field field--inline">
+              <span>Sort by</span>
+              <select
+                value={sort}
+                onChange={(e) => setSort(e.target.value as typeof sort)}
+              >
+                <option value="newest">Newest listed</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="mileage">Lowest mileage</option>
+              </select>
+            </label>
+          </div>
+          {sorted.length === 0 ? (
+            <p className="empty-state">
+              No vehicles match your filters.{' '}
+              <button
+                type="button"
+                className="btn btn--ghost"
+                onClick={() => setFilters(defaultFilters)}
+              >
+                Reset filters
+              </button>
+            </p>
+          ) : (
+            <div className="car-grid car-grid--market">
+              {sorted.map((car) => (
+                <CarCard key={car.id} car={car} />
+              ))}
+            </div>
+          )}
+          <p className="inventory-foot muted">
+            Need help choosing?{' '}
+            <Link to="/#contact">Contact the Ridgeways yard</Link> or use finance tools.
+          </p>
+        </div>
+      </div>
+    </>
   )
 }
