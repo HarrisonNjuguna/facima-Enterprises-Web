@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" fill="none">
+  <rect width="192" height="192" rx="36" fill="#0c1f1a"/>
+  <path d="M48 120h96v12H48zM56 72h32l24 40H56V72z" fill="#c45c26"/>
+  <text x="96" y="155" text-anchor="middle" fill="#f4f1ea" font-family="Georgia,serif" font-size="28" font-weight="700">Facima</text>
+</svg>

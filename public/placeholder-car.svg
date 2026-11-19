@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480" fill="none">
+  <rect width="640" height="480" fill="#e8e3d8"/>
+  <path d="M120 280h400l-40-96H160l-40 96z" fill="#5c7a6e" opacity="0.35"/>
+  <circle cx="200" cy="300" r="36" fill="#3d4f4a" opacity="0.4"/>
+  <circle cx="440" cy="300" r="36" fill="#3d4f4a" opacity="0.4"/>
+  <text x="320" y="250" text-anchor="middle" fill="#3d4f4a" font-family="system-ui,sans-serif" font-size="22">Photo pending</text>
+</svg>
