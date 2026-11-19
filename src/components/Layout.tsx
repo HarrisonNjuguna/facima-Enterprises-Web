@@ -1,17 +1,22 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
+import { DriveXFooter } from './drivex/DriveXFooter'
+import { DriveXHeader } from './drivex/DriveXHeader'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { InstallPwaBanner } from './InstallPwaBanner'
 
 export function Layout() {
+  const { pathname } = useLocation()
+  const isHome = pathname === '/'
+
   return (
-    <div className="app-shell">
-      <Header />
+    <div className={isHome ? 'app-shell app-shell--drivex' : 'app-shell'}>
+      {isHome ? <DriveXHeader /> : <Header />}
       <InstallPwaBanner />
       <main className="main-flow">
         <Outlet />
       </main>
-      <Footer />
+      {isHome ? <DriveXFooter /> : <Footer />}
     </div>
   )
 }

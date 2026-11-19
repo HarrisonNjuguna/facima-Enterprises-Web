@@ -1,0 +1,713 @@
+/* DriveX-style home (Facima marketplace) */
+.drivex-page {
+  --dx-navy: #0b1220;
+  --dx-navy-soft: #151d2e;
+  --dx-yellow: #f5b800;
+  --dx-yellow-dark: #d9a000;
+  --dx-text: #1a1a1a;
+  --dx-muted: #6b7280;
+  background: #fff;
+}
+
+.drivex-topbar {
+  background: var(--dx-navy);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.78rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.drivex-topbar__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.drivex-topbar ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+
+.drivex-topbar a {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+}
+
+.drivex-topbar a:hover {
+  color: var(--dx-yellow);
+}
+
+.drivex-topbar__support {
+  color: var(--dx-yellow);
+  font-weight: 600;
+}
+
+.drivex-nav {
+  background: var(--dx-navy-soft);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+.drivex-nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0;
+}
+
+.drivex-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.35rem;
+}
+
+.drivex-brand__icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--dx-yellow);
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 1.1rem;
+}
+
+.drivex-menu {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1.25rem;
+}
+
+.drivex-menu a {
+  color: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.drivex-menu a:hover,
+.drivex-menu a.active {
+  color: var(--dx-yellow);
+}
+
+.drivex-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.drivex-nav__actions a:not(.btn-dx) {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+
+.btn-dx {
+  background: var(--dx-yellow);
+  color: var(--dx-navy) !important;
+  font-weight: 700;
+  padding: 0.55rem 1.1rem;
+  border-radius: 8px;
+  border: none;
+  text-decoration: none;
+  font-size: 0.88rem;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(245, 184, 0, 0.45);
+}
+
+.btn-dx:hover {
+  background: var(--dx-yellow-dark);
+  color: var(--dx-navy) !important;
+}
+
+.drivex-nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 0.35rem 0.65rem;
+  border-radius: 6px;
+}
+
+@media (max-width: 900px) {
+  .drivex-nav-toggle {
+    display: block;
+  }
+
+  .drivex-menu {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    background: var(--dx-navy-soft);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .drivex-menu.is-open {
+    display: flex;
+  }
+
+  .drivex-nav__inner {
+    position: relative;
+    flex-wrap: wrap;
+  }
+}
+
+.drivex-hero {
+  position: relative;
+  min-height: 520px;
+  padding: 3.5rem 0 7.5rem;
+  display: flex;
+  align-items: center;
+  background: var(--dx-navy);
+  overflow: hidden;
+}
+
+.drivex-hero__bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+.drivex-hero__shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(11, 18, 32, 0.88) 0%,
+    rgba(11, 18, 32, 0.45) 55%,
+    rgba(11, 18, 32, 0.25) 100%
+  );
+}
+
+.drivex-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 620px;
+}
+
+.drivex-hero h1 {
+  color: #fff;
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  margin: 0 0 0.75rem;
+  line-height: 1.1;
+}
+
+.drivex-hero h1 em {
+  font-style: normal;
+  color: var(--dx-yellow);
+}
+
+.drivex-hero__lead {
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 1.05rem;
+  margin: 0;
+  max-width: 48ch;
+}
+
+.drivex-search-dock {
+  position: relative;
+  z-index: 2;
+  margin-top: -4.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.drivex-search {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  padding: 0.35rem 0.35rem 1.25rem;
+  border: 1px solid #e8eaed;
+}
+
+.drivex-search__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0.35rem;
+  background: #f4f5f7;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.drivex-search__tabs button {
+  flex: 1;
+  min-width: 100px;
+  border: none;
+  background: transparent;
+  padding: 0.55rem 0.75rem;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--dx-muted);
+  cursor: pointer;
+}
+
+.drivex-search__tabs button.is-active {
+  background: #fff;
+  color: var(--dx-text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.drivex-search__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.85rem;
+  padding: 0 0.9rem;
+}
+
+@media (max-width: 900px) {
+  .drivex-search__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .drivex-search__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.drivex-field label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--dx-muted);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.drivex-field input,
+.drivex-field select {
+  width: 100%;
+  padding: 0.6rem 0.65rem;
+  border: 1px solid #e0e3e8;
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.9rem;
+}
+
+.drivex-search__submit {
+  padding: 0 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.drivex-search__submit .btn-dx {
+  width: 100%;
+  text-align: center;
+  padding: 0.75rem;
+  font-size: 1rem;
+  display: block;
+}
+
+.drivex-section {
+  padding: 3rem 0 3.5rem;
+}
+
+.drivex-section--grey {
+  background: #f8f9fb;
+}
+
+.drivex-section__title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.drivex-section__title h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.75rem;
+  color: var(--dx-text);
+}
+
+.drivex-section__title p {
+  margin: 0;
+  color: var(--dx-muted);
+  font-size: 0.95rem;
+}
+
+.drivex-categories {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .drivex-categories {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+.drivex-cat {
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e8eaed;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+  color: inherit;
+}
+
+.drivex-cat:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+.drivex-cat img {
+  height: 72px;
+  width: auto;
+  margin: 0 auto 0.65rem;
+  object-fit: contain;
+}
+
+.drivex-cat strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--dx-text);
+}
+
+.drivex-cat span {
+  font-size: 0.82rem;
+  color: var(--dx-yellow-dark);
+  font-weight: 700;
+}
+
+.drivex-promos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .drivex-promos {
+    grid-template-columns: 1fr;
+  }
+}
+
+.drivex-promo {
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: stretch;
+  text-decoration: none;
+  color: #fff;
+  position: relative;
+}
+
+.drivex-promo--yellow {
+  background: linear-gradient(135deg, #f5b800 0%, #e5a800 100%);
+  color: var(--dx-navy);
+}
+
+.drivex-promo--dark {
+  background: linear-gradient(135deg, #1a2332 0%, #0b1220 100%);
+}
+
+.drivex-promo__copy {
+  padding: 1.75rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 1;
+}
+
+.drivex-promo__copy h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+}
+
+.drivex-promo__copy p {
+  margin: 0 0 1rem;
+  font-size: 0.92rem;
+  opacity: 0.9;
+}
+
+.drivex-promo__img {
+  width: 45%;
+  object-fit: cover;
+  opacity: 0.95;
+}
+
+.drivex-deals {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 1100px) {
+  .drivex-deals {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+.drivex-deal {
+  background: #fff;
+  border: 1px solid #e8eaed;
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: box-shadow 0.2s;
+}
+
+.drivex-deal:hover {
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1);
+}
+
+.drivex-deal__media {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #f0f1f3;
+}
+
+.drivex-deal__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.drivex-deal__off {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background: var(--dx-yellow);
+  color: var(--dx-navy);
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.2rem 0.45rem;
+  border-radius: 4px;
+}
+
+.drivex-deal__body {
+  padding: 0.85rem;
+}
+
+.drivex-deal__body h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.drivex-deal__price {
+  color: var(--dx-yellow-dark);
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.drivex-steps {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .drivex-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.drivex-step__icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  margin: 0 auto 0.75rem;
+  border-radius: 50%;
+  background: rgba(245, 184, 0, 0.15);
+  color: var(--dx-yellow-dark);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.drivex-step h3 {
+  margin: 0 0 0.35rem;
+  font-size: 0.95rem;
+}
+
+.drivex-step p {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--dx-muted);
+}
+
+.drivex-reviews {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+@media (max-width: 800px) {
+  .drivex-reviews {
+    grid-template-columns: 1fr;
+  }
+}
+
+.drivex-review {
+  background: #fff;
+  border: 1px solid #e8eaed;
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.drivex-review__avatar {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: var(--dx-navy);
+  color: var(--dx-yellow);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  margin: 0 auto 0.75rem;
+}
+
+.drivex-review__stars {
+  color: var(--dx-yellow);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.drivex-app-row {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .drivex-app-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.drivex-app-card {
+  background: var(--dx-navy);
+  color: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.drivex-app-card h2 {
+  color: #fff;
+  margin-top: 0;
+}
+
+.drivex-app-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.drivex-app-badges span {
+  background: #fff;
+  color: var(--dx-navy);
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.drivex-phone-mock {
+  max-width: 220px;
+  margin: 0 auto;
+  border-radius: 24px;
+  border: 4px solid #333;
+  background: #111;
+  padding: 1rem;
+  color: var(--dx-yellow);
+  text-align: center;
+  font-weight: 700;
+}
+
+.drivex-footer {
+  background: var(--dx-navy);
+  color: rgba(255, 255, 255, 0.78);
+  padding: 3rem 0 0;
+}
+
+.drivex-footer a {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.drivex-footer a:hover {
+  color: var(--dx-yellow);
+}
+
+.drivex-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 2rem;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 900px) {
+  .drivex-footer__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.drivex-footer h3 {
+  color: #fff;
+  font-size: 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.drivex-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.drivex-footer__pay {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.drivex-footer__pay span {
+  background: #fff;
+  color: var(--dx-navy);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.drivex-footer__bar {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+}
