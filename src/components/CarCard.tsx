@@ -1,25 +1,28 @@
 import { Link } from 'react-router-dom'
 import type { CarListing } from '../types/car'
+import { STOCK_TYPE_LABEL } from '../types/car'
 import { formatKes, formatMileage } from '../utils/format'
 
 export function CarCard({ car }: { car: CarListing }) {
   const thumb = car.images[0] ?? '/placeholder-car.svg'
+  const stockLabel = STOCK_TYPE_LABEL[car.stockType ?? 'local']
 
   return (
     <article className="car-card">
       <Link to={`/inventory/${car.id}`} className="car-card__media">
         <img src={thumb} alt={`${car.year} ${car.make} ${car.model}`} loading="lazy" />
-        {car.featured && <span className="car-card__badge">Featured</span>}
-        {car.financeEligible && (
-          <span className="car-card__badge car-card__badge--finance">
-            Finance OK
-          </span>
+        <span
+          className={`car-card__badge car-card__badge--stock car-card__badge--${car.stockType ?? 'local'}`}
+        >
+          {stockLabel}
+        </span>
+        {car.featured && (
+          <span className="car-card__badge car-card__badge--featured">Featured</span>
         )}
       </Link>
       <div className="car-card__body">
         <p className="car-card__meta">
-          {car.year} · {car.mileage ? formatMileage(car.mileage) : '—'} ·{' '}
-          {car.transmission}
+          {car.year} · {formatMileage(car.mileage)} · {car.transmission} · {car.bodyType}
         </p>
         <h3>
           <Link to={`/inventory/${car.id}`}>

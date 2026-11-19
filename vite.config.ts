@@ -13,8 +13,8 @@ export default defineConfig({
         short_name: 'Facima',
         description:
           'Browse verified used cars, estimate finance, and connect with Facima Motors in Nairobi.',
-        theme_color: '#0a0a0a',
-        background_color: '#141414',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait-primary',
         scope: '/',

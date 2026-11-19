@@ -92,6 +92,18 @@ function FilterFields({
         </select>
       </label>
       <label className="field">
+        <span>Stock type</span>
+        <select
+          value={filters.stockType}
+          onChange={(e) => onChange({ stockType: e.target.value })}
+        >
+          <option value="">Any stock</option>
+          <option value="local">Kenyan Used</option>
+          <option value="foreign">Foreign Used</option>
+          <option value="new">Brand New</option>
+        </select>
+      </label>
+      <label className="field">
         <span>Fuel</span>
         <select
           value={filters.fuel}

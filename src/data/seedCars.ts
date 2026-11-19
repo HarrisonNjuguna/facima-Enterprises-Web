@@ -15,6 +15,7 @@ export const seedCars: CarListing[] = [
     fuel: 'Petrol',
     transmission: 'Automatic',
     bodyType: 'Sedan',
+    stockType: 'local',
     color: 'Silver',
     location: 'Nairobi — Westlands',
     description:
@@ -42,6 +43,7 @@ export const seedCars: CarListing[] = [
     fuel: 'Petrol',
     transmission: 'Automatic',
     bodyType: 'SUV',
+    stockType: 'new',
     color: 'Soul Red',
     location: 'Nairobi — Karen',
     description:
@@ -68,6 +70,7 @@ export const seedCars: CarListing[] = [
     fuel: 'Petrol',
     transmission: 'Automatic',
     bodyType: 'SUV',
+    stockType: 'foreign',
     color: 'Dark Blue',
     location: 'Nairobi — Lavington',
     description:
@@ -89,6 +92,7 @@ export const seedCars: CarListing[] = [
     fuel: 'Diesel',
     transmission: 'Manual',
     bodyType: 'Pickup',
+    stockType: 'local',
     color: 'White',
     location: 'Nairobi — Industrial Area',
     description:
@@ -109,6 +113,7 @@ export const seedCars: CarListing[] = [
     fuel: 'Petrol',
     transmission: 'Automatic',
     bodyType: 'Hatchback',
+    stockType: 'local',
     color: 'Pearl White',
     location: 'Nairobi — Kilimani',
     description:
@@ -129,6 +134,7 @@ export const seedCars: CarListing[] = [
     fuel: 'Petrol',
     transmission: 'Automatic',
     bodyType: 'Sedan',
+    stockType: 'foreign',
     color: 'Black',
     location: 'Nairobi — Upper Hill',
     description:

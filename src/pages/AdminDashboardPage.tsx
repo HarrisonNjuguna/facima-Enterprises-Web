@@ -7,6 +7,7 @@ import type {
   BodyType,
   CarListing,
   FuelType,
+  StockType,
   Transmission,
 } from '../types/car'
 import { formatKes } from '../utils/format'
@@ -21,6 +22,7 @@ const emptyForm = (): Omit<CarListing, 'id' | 'createdAt'> => ({
   fuel: 'Petrol',
   transmission: 'Automatic',
   bodyType: 'Sedan',
+  stockType: 'local',
   color: '',
   location: 'Nairobi',
   description: '',
@@ -247,6 +249,19 @@ function AdminFormFields({
                 {b}
               </option>
             ))}
+          </select>
+        </label>
+        <label className="field">
+          <span>Stock type</span>
+          <select
+            value={form.stockType}
+            onChange={(e) =>
+              setForm({ ...form, stockType: e.target.value as StockType })
+            }
+          >
+            <option value="local">Kenyan Used</option>
+            <option value="foreign">Foreign Used</option>
+            <option value="new">Brand New</option>
           </select>
         </label>
         <label className="field">

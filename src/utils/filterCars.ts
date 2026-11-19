@@ -19,6 +19,7 @@ export function filterCars(cars: CarListing[], filters: CarFilters): CarListing[
     }
     if (filters.make && car.make !== filters.make) return false
     if (filters.bodyType && car.bodyType !== filters.bodyType) return false
+    if (filters.stockType && car.stockType !== filters.stockType) return false
     if (filters.fuel && car.fuel !== filters.fuel) return false
     if (filters.transmission && car.transmission !== filters.transmission)
       return false
@@ -33,6 +34,7 @@ export const defaultFilters: CarFilters = {
   query: '',
   make: '',
   bodyType: '',
+  stockType: '',
   fuel: '',
   transmission: '',
   minPrice: '',

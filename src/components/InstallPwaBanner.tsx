@@ -7,9 +7,7 @@ interface BeforeInstallPromptEvent extends Event {
 
 export function InstallPwaBanner() {
   const [deferred, setDeferred] = useState<BeforeInstallPromptEvent | null>(null)
-  const [dismissed, setDismissed] = useState(
-    () => localStorage.getItem('facima_pwa_dismiss') === '1',
-  )
+  const [bannerOpen, setBannerOpen] = useState(true)
   const [installed, setInstalled] = useState(false)
 
   useEffect(() => {
@@ -34,40 +32,49 @@ export function InstallPwaBanner() {
     await deferred.prompt()
     await deferred.userChoice
     setDeferred(null)
+    setBannerOpen(false)
   }
 
-  if (installed || dismissed || !deferred) return null
+  if (installed || !deferred) return null
+
+  if (!bannerOpen) {
+    return (
+      <button
+        type="button"
+        className="pwa-install-fab"
+        aria-label="Install Facima app"
+        onClick={() => setBannerOpen(true)}
+      >
+        <span className="pwa-install-fab__pulse" aria-hidden />
+        Install app
+      </button>
+    )
+  }
 
   return (
-    <PwaBannerContent
-      install={install}
-      onCancel={() => {
-        localStorage.setItem('facima_pwa_dismiss', '1')
-        setDismissed(true)
-      }}
-    />
-  )
-}
-
-function PwaBannerContent({
-  install,
-  onCancel,
-}: {
-  install: () => void
-  onCancel: () => void
-}) {
-  return (
-    <aside className="pwa-banner" role="region" aria-label="Install app">
+    <aside className="pwa-banner pwa-banner--glow" role="region" aria-label="Install app">
+      <button
+        type="button"
+        className="pwa-banner__close"
+        aria-label="Dismiss install prompt"
+        onClick={() => setBannerOpen(false)}
+      >
+        ×
+      </button>
       <p>
-        <strong>Install Facima</strong> — browse stock and run finance estimates
-        from your home screen.
+        <strong>Install Facima</strong> — browse stock and finance from your home
+        screen.
       </p>
       <div className="pwa-banner__actions">
         <button type="button" className="btn btn--primary btn--sm" onClick={install}>
           Install
         </button>
-        <button type="button" className="btn btn--ghost btn--sm" onClick={onCancel}>
-          Not now
+        <button
+          type="button"
+          className="btn btn--ghost btn--sm"
+          onClick={() => setBannerOpen(false)}
+        >
+          Later
         </button>
       </div>
     </aside>

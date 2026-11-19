@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CarCard } from '../components/CarCard'
 import { FilterPanel } from '../components/FilterPanel'
@@ -12,7 +12,18 @@ export function InventoryPage() {
   const [filters, setFilters] = useState<CarFilters>(() => ({
     ...defaultFilters,
     query: params.get('q') ?? '',
+    bodyType: params.get('bodyType') ?? '',
+    stockType: params.get('stockType') ?? '',
   }))
+
+  useEffect(() => {
+    setFilters((f) => ({
+      ...f,
+      query: params.get('q') ?? '',
+      bodyType: params.get('bodyType') ?? '',
+      stockType: params.get('stockType') ?? '',
+    }))
+  }, [params])
   const [sort, setSort] = useState<'newest' | 'price-asc' | 'price-desc' | 'mileage'>(
     'newest',
   )

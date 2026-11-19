@@ -1,135 +1,70 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { BodyTypeBrowse } from '../components/BodyTypeBrowse'
 import { CarCard } from '../components/CarCard'
-import { FinanceCalculator } from '../components/FinanceCalculator'
+import { FinanceTeaser } from '../components/FinanceTeaser'
 import { FINANCE_DEPOSIT_RATE } from '../config/finance'
-import { MOCK_CAR_IMAGES } from '../data/mockImages'
 import { useCars } from '../context/CarContext'
-import { formatKes } from '../utils/format'
 
 export function HomePage() {
   const { cars } = useCars()
-  const featured = cars.filter((c) => c.featured).slice(0, 4)
-  const [showExitCta, setShowExitCta] = useState(false)
-
-  useEffect(() => {
-    document.documentElement.classList.add('home-scroll-active')
-    const onScroll = () => {
-      setShowExitCta(window.scrollY > window.innerHeight * 1.2)
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-    return () => {
-      document.documentElement.classList.remove('home-scroll-active')
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
+  const featured = cars.filter((c) => c.featured).slice(0, 6)
+  const localUsed = cars.filter((c) => c.stockType === 'local').slice(0, 4)
+  const foreignNew = cars
+    .filter((c) => c.stockType === 'foreign' || c.stockType === 'new')
+    .slice(0, 4)
 
   return (
-    <div className="home-experience">
-      <a href="#featured" className="scroll-hint" aria-label="Scroll to explore">
-        <span>Explore the showroom</span>
-        <span className="scroll-hint__icon" aria-hidden>
-          ↓
-        </span>
-      </a>
-
-      <section className="home-panel hero hero--showcase">
-        <div
-          className="hero__bg hero__bg--mock"
-          style={{ backgroundImage: `url(${MOCK_CAR_IMAGES.showroom})` }}
-          aria-hidden
-        />
-        <div className="container hero__content">
-          <div className="hero__panel">
-            <p className="eyebrow">Showroom preview · Red &amp; black edition</p>
-            <h1>Drive home the story before you open the catalogue.</h1>
+    <div className="home-experience home-experience--light">
+      <section className="hero hero--pro">
+        <div className="container hero-pro">
+          <div className="hero-pro__copy">
+            <p className="eyebrow">Facima Motors · Nairobi</p>
+            <h1>Find your next car the smart way.</h1>
             <p className="lead">
-              Stay on this page to compare finance paths, inspect mock yard shots, and
-              run real numbers. When you are ready, full inventory is one click away.
+              Handpicked Kenyan used, foreign used, and brand new units — inspected,
+              honestly priced, and ready for bank or microfinance from{' '}
+              {Math.round(FINANCE_DEPOSIT_RATE.bank * 100)}% deposit.
             </p>
             <div className="hero__actions">
-              <a href="#finance-paths" className="btn btn--primary">
-                Compare finance deposits
-              </a>
-              <a href="#calculator" className="btn btn--secondary">
-                Monthly payment estimate
-              </a>
-            </div>
-            <p className="mock-label">All vehicle photos on this preview use Facima mock imagery.</p>
-          </div>
-          <div className="hero__panel hero__panel--card">
-            <h2 className="hero-card__title">Quick stock glance</h2>
-            <ul className="hero-glance">
-              {featured.slice(0, 3).map((car) => (
-                <li key={car.id}>
-                  <img src={car.images[0]} alt="" />
-                  <div>
-                    <strong>
-                      {car.year} {car.make} {car.model}
-                    </strong>
-                    <span>{formatKes(car.price)}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <p className="hero-search__note">
-              Scroll for finance terms, then{' '}
-              <Link to="/inventory">view all {cars.length} listings</Link>.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="home-panel section--inset" id="finance-paths">
-        <div className="container">
-          <header className="section__head">
-            <h2>Two finance doors — one yard</h2>
-            <Link to="/finance/terms">Full terms &amp; bank steps →</Link>
-          </header>
-          <div className="finance-path-grid">
-            <div className="finance-path finance-path--bank">
-              <p className="finance-path__badge">Bank partner route</p>
-              <p className="finance-path__deposit">
-                From {Math.round(FINANCE_DEPOSIT_RATE.bank * 100)}% deposit
-              </p>
-              <p>
-                Co-op, NCBA, and similar lenders may finance up to 80–90% of value.
-                Facima&apos;s floor minimum is{' '}
-                <strong>10%</strong> cash or trade-in top-up on approved profiles.
-              </p>
-              <a href="#calculator" className="btn btn--primary btn--sm">
-                Estimate with 10% deposit
-              </a>
-            </div>
-            <div className="finance-path finance-path--mfi">
-              <p className="finance-path__badge">Microfinance / SACCO</p>
-              <p className="finance-path__deposit">
-                {Math.round(FINANCE_DEPOSIT_RATE.microfinance * 100)}% deposit
-              </p>
-              <p>
-                Faster files for SMEs and informal income. Expect{' '}
-                <strong>30%</strong> upfront before disbursement — ideal when you want
-                speed over the lowest rate.
-              </p>
-              <Link to="/finance" className="btn btn--secondary btn--sm">
-                Open full calculator
+              <Link to="/inventory" className="btn btn--primary">
+                Browse {cars.length} vehicles
               </Link>
+              <a href="tel:+254712345678" className="btn btn--secondary">
+                Call the yard
+              </a>
             </div>
           </div>
+          <dl className="stat-pills">
+            <div>
+              <dt>{cars.length}+</dt>
+              <dd>Cars in stock</dd>
+            </div>
+            <div>
+              <dt>100%</dt>
+              <dd>Inspected listings</dd>
+            </div>
+            <div>
+              <dt>Same-day</dt>
+              <dd>Finance estimates</dd>
+            </div>
+            <div>
+              <dt>Free</dt>
+              <dd>Pre-purchase advice</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
-      <section className="home-panel section container" id="featured">
+      <BodyTypeBrowse />
+
+      <section className="section container">
         <header className="section__head">
-          <h2>Featured mock listings</h2>
-          <span className="mock-label">Preview imagery only</span>
+          <div>
+            <h2>Featured vehicles</h2>
+            <p className="muted section__sub">Verified mock photos until your yard shoot.</p>
+          </div>
+          <Link to="/inventory">View all →</Link>
         </header>
-        <div className="showcase-strip">
-          <img src={MOCK_CAR_IMAGES.suvRed} alt="" className="showcase-strip__wide" />
-          <img src={MOCK_CAR_IMAGES.luxuryBlack} alt="" />
-          <img src={MOCK_CAR_IMAGES.pickupWhite} alt="" />
-        </div>
         <div className="car-grid">
           {featured.map((car) => (
             <CarCard key={car.id} car={car} />
@@ -137,72 +72,82 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="home-panel section section--dark">
-        <div className="container split">
+      <section className="section section--muted container" id="local-used">
+        <header className="section__head">
           <div>
-            <h2>Yard process</h2>
-            <ol className="steps">
-              <li>
-                <strong>Walk the floor</strong> — every car on this site is photo-ready;
-                live units mirror these mock angles until your shoot day.
-              </li>
-              <li>
-                <strong>Pick bank or MFI path</strong> — deposits at 10% or 30% set how
-                much you finance.
-              </li>
-              <li>
-                <strong>Drive out</strong> — insurance, NTSA, and logbook handled with
-                partner checklists (see finance terms).
-              </li>
-            </ol>
+            <h2>Kenyan used</h2>
+            <p className="muted section__sub">
+              Locally sourced and duty-paid units on Kenyan roads.
+            </p>
           </div>
-          <div className="trust-card trust-card--red">
-            <h3>Partners we mirror</h3>
-            <ul>
-              <li>Co-operative Bank asset finance (up to 80% bank financing)</li>
-              <li>NCBA online asset finance workflow</li>
-              <li>Microfinance &amp; SACCO channels at 30% deposit standard</li>
-            </ul>
-            <Link to="/finance/terms" className="btn btn--primary btn--sm">
-              Read application instructions
-            </Link>
+          <Link to="/inventory?stockType=local">See all local →</Link>
+        </header>
+        <div className="car-grid">
+          {localUsed.map((car) => (
+            <CarCard key={car.id} car={car} />
+          ))}
+        </div>
+      </section>
+
+      <section className="section container" id="foreign-new">
+        <header className="section__head">
+          <div>
+            <h2>Foreign used &amp; brand new</h2>
+            <p className="muted section__sub">
+              Imports and zero-mile showroom stock with finance options.
+            </p>
+          </div>
+          <Link to="/inventory?stockType=foreign">Browse imports →</Link>
+        </header>
+        <div className="car-grid">
+          {foreignNew.map((car) => (
+            <CarCard key={car.id} car={car} />
+          ))}
+        </div>
+      </section>
+
+      <section className="section section--muted container">
+        <div className="value-grid">
+          <div className="value-card">
+            <h3>Inspected &amp; verified</h3>
+            <p>Mechanical checks and logbook review before each listing goes live.</p>
+          </div>
+          <div className="value-card">
+            <h3>Honest pricing</h3>
+            <p>Fixed KES prices — no surprise yard fees on the units we advertise.</p>
+          </div>
+          <div className="value-card">
+            <h3>Flexible finance</h3>
+            <p>
+              Bank from {Math.round(FINANCE_DEPOSIT_RATE.bank * 100)}% deposit · MFI from{' '}
+              {Math.round(FINANCE_DEPOSIT_RATE.microfinance * 100)}%.
+            </p>
+          </div>
+          <div className="value-card">
+            <h3>Trade-in welcome</h3>
+            <p>Fair valuations when you upgrade from your current car.</p>
           </div>
         </div>
       </section>
 
-      <section className="home-panel section container" id="calculator">
-        <FinanceCalculator compact showTermsLink />
+      <section className="section container">
+        <FinanceTeaser />
       </section>
 
-      <section className="home-panel section section--cta">
-        <div className="container home-exit">
-          <h2>Ready to leave the showroom?</h2>
-          <p>
-            You have seen deposits, mock stock, and repayment estimates. Continue to
-            inventory, sell/trade-in, or speak to the desk.
-          </p>
-          <div className="hero__actions">
-            <Link to="/inventory" className="btn btn--primary">
-              Open full inventory
-            </Link>
-            <Link to="/sell" className="btn btn--secondary">
-              Sell or trade-in
-            </Link>
-            <a href="tel:+254712345678" className="btn btn--ghost">
-              Call the yard
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {showExitCta && (
-        <aside className="home-floating-cta">
-          <span>Finished browsing the home experience?</span>
-          <Link to="/inventory" className="btn btn--primary btn--sm">
-            Go to inventory
+      <section className="section container home-exit home-exit--inline">
+        <h2>Ready to visit the yard?</h2>
+        <p className="muted">
+          Chat on the phone, book a viewing, or sell your car the same week.
+        </p>
+        <div className="hero__actions">
+          <Link to="/inventory" className="btn btn--primary">
+            Open inventory
           </Link>
-        </aside>
-      )}
+          <Link to="/sell" className="btn btn--secondary">
+            Sell / trade-in
+          </Link>
+        </div>
+      </section>
     </div>
   )
 }

@@ -8,15 +8,25 @@ import {
 } from 'react'
 import { seedCars } from '../data/seedCars'
 import type { CarListing } from '../types/car'
+import { normalizeStockType } from '../utils/stockType'
 
-const STORAGE_KEY = 'facima_car_inventory_v2'
+const STORAGE_KEY = 'facima_car_inventory_v3'
+
+function hydrateListing(car: CarListing): CarListing {
+  return {
+    ...car,
+    stockType: normalizeStockType(car.stockType),
+  }
+}
 
 function loadInventory(): CarListing[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (raw) {
       const parsed = JSON.parse(raw) as CarListing[]
-      if (Array.isArray(parsed) && parsed.length > 0) return parsed
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        return parsed.map(hydrateListing)
+      }
     }
   } catch {
   }
