@@ -1754,6 +1754,243 @@ html.home-scroll-active {
   }
 }
 
+/* Karuri-style bands & glass hero */
+.home-karuri {
+  overflow-x: clip;
+}
+
+.home-karuri .band .section-inner {
+  padding: 0;
+}
+
+.band {
+  width: 100%;
+  padding: var(--space-section) 0;
+}
+
+.band--white {
+  background: var(--white);
+}
+
+.band--soft {
+  background: var(--surface);
+  border-block: 1px solid var(--cream-dark);
+}
+
+.band--dark {
+  background: var(--black);
+  border-block: 1px solid #222;
+}
+
+.section__link {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--red);
+  white-space: nowrap;
+}
+
+.section__sub--wide {
+  max-width: 62ch;
+}
+
+.hero-glass {
+  position: relative;
+  min-height: min(92vh, 880px);
+  display: flex;
+  align-items: center;
+  padding: calc(var(--space-section) + 1rem) 0 var(--space-section);
+  overflow: hidden;
+}
+
+.hero-glass__photo {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transform: scale(1.04);
+}
+
+.hero-glass__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(255, 255, 255, 0.55) 45%,
+    rgba(255, 255, 255, 0.25) 100%
+  );
+}
+
+.hero-glass__layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 960px) {
+  .hero-glass__layout {
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: stretch;
+    gap: 1.5rem;
+  }
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 16px;
+  padding: 1.5rem 1.65rem;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.hero-glass__copy h1 {
+  color: var(--black);
+  margin-top: 0;
+}
+
+.hero-glass__copy .lead {
+  color: var(--ink-muted);
+  max-width: 52ch;
+}
+
+.stat-pills--glass {
+  margin: 0;
+  align-content: center;
+  height: 100%;
+}
+
+.stat-pills--glass > div {
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
+.get-in-touch.band--dark {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.get-in-touch.band--dark h2,
+.get-in-touch.band--dark .get-in-touch__label {
+  color: var(--white);
+}
+
+.get-in-touch__head {
+  margin-bottom: 1.5rem;
+}
+
+.get-in-touch__head h2 {
+  margin: 0 0 0.35rem;
+}
+
+.get-in-touch__intro {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.get-in-touch__list {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 1.5rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .get-in-touch__list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.get-in-touch__label {
+  display: block;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+  color: var(--ink-muted);
+}
+
+.get-in-touch__list p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.get-in-touch.band--dark a {
+  color: #fff;
+}
+
+.get-in-touch__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.btn--whatsapp {
+  background: #128c7e;
+  color: var(--white);
+  border: 1px solid #0f7668;
+}
+
+.btn--whatsapp:hover {
+  background: #0f7668;
+  color: var(--white);
+}
+
+.get-in-touch--compact {
+  padding: 1.5rem 0;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.testimonial-card {
+  margin: 0;
+  padding: 1.25rem;
+  background: var(--white);
+  border: 1px solid var(--cream-dark);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.testimonial-card p {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.testimonial-card footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.footer-muted {
+  margin: 0 0 0.35rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.5;
+}
+
+.car-card {
+  border-radius: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.car-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.1);
+}
+
 /* --- Layout polish --- */
 .finance-calc__header h2 {
   margin-top: 0;

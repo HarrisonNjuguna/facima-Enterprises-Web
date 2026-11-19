@@ -1,3 +1,5 @@
+import { CONTACT } from '../config/contact'
+
 export function SellPage() {
   return (
     <section className="section container sell-page">
@@ -13,7 +15,7 @@ export function SellPage() {
         onSubmit={(e) => {
           e.preventDefault()
           alert(
-            'Thanks — in production this form would reach our sales desk. Call +254 712 345 678 to continue.',
+            `Thanks — we'll reach you shortly. Call ${CONTACT.phoneDisplay} to follow up.`,
           )
         }}
       >

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { CONTACT } from '../config/contact'
 
 export function Header() {
   const [open, setOpen] = useState(false)
@@ -12,7 +13,7 @@ export function Header() {
             FM
           </span>
           <span className="brand__text">
-            Facima <em>Motors</em>
+            Facima <em>Enterprises</em>
           </span>
         </Link>
         <button
@@ -40,8 +41,8 @@ export function Header() {
           <NavLink to="/sell" onClick={() => setOpen(false)}>
             Sell your car
           </NavLink>
-          <a href="tel:+254712345678" className="header-cta" onClick={() => setOpen(false)}>
-            +254 712 345 678
+          <a href={`tel:${CONTACT.phoneTel}`} className="header-cta" onClick={() => setOpen(false)}>
+            {CONTACT.phoneDisplay}
           </a>
         </nav>
       </div>

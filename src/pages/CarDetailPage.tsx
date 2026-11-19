@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { FinanceCalculator } from '../components/FinanceCalculator'
+import { CONTACT } from '../config/contact'
 import { useCars } from '../context/CarContext'
 import { formatKes, formatMileage } from '../utils/format'
 
@@ -81,7 +82,7 @@ export function CarDetailPage() {
           </>
         )}
         <div className="car-detail__cta">
-          <a href="tel:+254712345678" className="btn btn--primary">
+          <a href={`tel:${CONTACT.phoneTel}`} className="btn btn--primary">
             Book viewing
           </a>
           <Link to="/finance" state={{ price: car.price }} className="btn btn--secondary">

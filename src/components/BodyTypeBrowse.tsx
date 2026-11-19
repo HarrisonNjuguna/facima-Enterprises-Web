@@ -12,23 +12,25 @@ const TYPES: { type: BodyType; label: string }[] = [
 
 export function BodyTypeBrowse() {
   return (
-    <section className="section section--muted container">
-      <header className="section__head section__head--stacked">
-        <div>
-          <h2>Browse by body type</h2>
-          <p className="muted section__sub">Pick the shape that fits your life.</p>
+    <section className="band band--soft">
+      <div className="container section-inner">
+        <header className="section__head section__head--stacked">
+          <div>
+            <h2>Browse by body type</h2>
+            <p className="muted section__sub">Pick the shape that fits your life.</p>
+          </div>
+        </header>
+        <div className="body-type-grid">
+          {TYPES.map(({ type, label }) => (
+            <Link
+              key={type}
+              to={`/inventory?bodyType=${encodeURIComponent(type)}`}
+              className="body-type-chip"
+            >
+              {label}
+            </Link>
+          ))}
         </div>
-      </header>
-      <div className="body-type-grid">
-        {TYPES.map(({ type, label }) => (
-          <Link
-            key={type}
-            to={`/inventory?bodyType=${encodeURIComponent(type)}`}
-            className="body-type-chip"
-          >
-            {label}
-          </Link>
-        ))}
       </div>
     </section>
   )
