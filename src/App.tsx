@@ -6,6 +6,7 @@ import { AdminDashboardPage } from './pages/AdminDashboardPage'
 import { AdminLoginPage } from './pages/AdminLoginPage'
 import { CarDetailPage } from './pages/CarDetailPage'
 import { FinancePage } from './pages/FinancePage'
+import { FinanceTermsPage } from './pages/FinanceTermsPage'
 import { HomePage } from './pages/HomePage'
 import { InventoryPage } from './pages/InventoryPage'
 import { SellPage } from './pages/SellPage'
@@ -21,6 +22,7 @@ export default function App() {
               <Route path="inventory" element={<InventoryPage />} />
               <Route path="inventory/:id" element={<CarDetailPage />} />
               <Route path="finance" element={<FinancePage />} />
+              <Route path="finance/terms" element={<FinanceTermsPage />} />
               <Route path="sell" element={<SellPage />} />
               <Route path="gate" element={<AdminLoginPage />} />
               <Route path="gate/inventory" element={<AdminDashboardPage />} />

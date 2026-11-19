@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0a0a0a"/>
+  <text x="24" y="40" fill="#d90429" font-family="system-ui" font-size="14" font-weight="600">MOCK  SUV</text>
+  <path d="M90 340h620l-70-140H160l-70 140z" fill="#d90429"/>
+  <path d="M150 200h500l-45-80H195l-45 80z" fill="#9d0216"/>
+  <rect x="220" y="215" width="160" height="70" rx="4" fill="#1a1a1a" opacity="0.35"/>
+  <circle cx="210" cy="365" r="46" fill="#111" stroke="#fafafa" stroke-width="4"/>
+  <circle cx="590" cy="365" r="46" fill="#111" stroke="#fafafa" stroke-width="4"/>
+</svg>

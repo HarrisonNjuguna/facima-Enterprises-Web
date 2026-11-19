@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#0a0a0a"/>
+  <rect y="620" width="1600" height="280" fill="#141414"/>
+  <ellipse cx="800" cy="680" rx="520" ry="40" fill="#d90429" opacity="0.15"/>
+  <path d="M280 520h1040l-80-120H360l-80 120z" fill="#1f1f1f"/>
+  <path d="M320 480h920l-50-80H370l-50 80z" fill="#2a2a2a"/>
+  <rect x="340" y="400" width="280" height="90" rx="8" fill="#d90429" opacity="0.25"/>
+  <circle cx="420" cy="540" r="48" fill="#111" stroke="#333" stroke-width="6"/>
+  <circle cx="1180" cy="540" r="48" fill="#111" stroke="#333" stroke-width="6"/>
+  <text x="800" y="320" text-anchor="middle" fill="#fafafa" font-family="Georgia,serif" font-size="48">Facima Showroom</text>
+  <text x="800" y="380" text-anchor="middle" fill="#d90429" font-family="system-ui,sans-serif" font-size="22" letter-spacing="8">MOCK PREVIEW</text>
+</svg>

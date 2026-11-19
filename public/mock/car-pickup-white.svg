@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#0d0d0d"/>
+  <text x="24" y="40" fill="#d90429" font-family="system-ui" font-size="14" font-weight="600">MOCK  PICKUP</text>
+  <rect x="380" y="250" width="320" height="100" fill="#f5f5f5"/>
+  <path d="M120 350h560l-40-100H160l-40 100z" fill="#ececec"/>
+  <path d="M160 250h220l-30-70H190l-30 70z" fill="#ddd"/>
+  <circle cx="230" cy="375" r="44" fill="#111" stroke="#d90429" stroke-width="4"/>
+  <circle cx="550" cy="375" r="44" fill="#111" stroke="#d90429" stroke-width="4"/>
+</svg>

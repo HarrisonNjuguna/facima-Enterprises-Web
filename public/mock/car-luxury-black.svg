@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#050505"/>
+  <rect x="0" y="0" width="800" height="4" fill="#d90429"/>
+  <text x="24" y="44" fill="#d90429" font-family="system-ui" font-size="14" font-weight="600">MOCK  EXECUTIVE</text>
+  <path d="M110 365h580l-48-115H158l-48 115z" fill="#0f0f0f" stroke="#333" stroke-width="2"/>
+  <path d="M200 250h400l-40-75H240l-40 75z" fill="#1c1c1c"/>
+  <circle cx="230" cy="390" r="46" fill="#000" stroke="#d90429" stroke-width="5"/>
+  <circle cx="570" cy="390" r="46" fill="#000" stroke="#d90429" stroke-width="5"/>
+</svg>

@@ -6,7 +6,7 @@ export function Header() {
 
   return (
     <header className="site-header">
-      <div className="site-header__inner container">
+      <div className="site-header__bar container">
         <Link to="/" className="brand" onClick={() => setOpen(false)}>
           <span className="brand__mark" aria-hidden>
             FM
@@ -33,6 +33,9 @@ export function Header() {
           </NavLink>
           <NavLink to="/finance" onClick={() => setOpen(false)}>
             Finance
+          </NavLink>
+          <NavLink to="/finance/terms" className="nav-link--minor" onClick={() => setOpen(false)}>
+            Terms
           </NavLink>
           <NavLink to="/sell" onClick={() => setOpen(false)}>
             Sell your car

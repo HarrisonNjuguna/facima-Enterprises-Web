@@ -9,7 +9,7 @@ import {
 import { seedCars } from '../data/seedCars'
 import type { CarListing } from '../types/car'
 
-const STORAGE_KEY = 'facima_car_inventory'
+const STORAGE_KEY = 'facima_car_inventory_v2'
 
 function loadInventory(): CarListing[] {
   try {

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#111"/>
+  <text x="24" y="40" fill="#d90429" font-family="system-ui" font-size="14" font-weight="600">MOCK  SEDAN</text>
+  <path d="M100 370h600l-55-105H155l-55 105z" fill="#1a1a1a"/>
+  <path d="M190 255h420l-38-68H228l-38 68z" fill="#252525"/>
+  <circle cx="220" cy="390" r="44" fill="#0a0a0a" stroke="#d90429" stroke-width="5"/>
+  <circle cx="580" cy="390" r="44" fill="#0a0a0a" stroke="#d90429" stroke-width="5"/>
+</svg>

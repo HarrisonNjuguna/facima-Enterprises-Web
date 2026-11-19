@@ -1,4 +1,5 @@
 import type { CarListing } from '../types/car'
+import { MOCK_CAR_IMAGES } from './mockImages'
 
 const now = new Date().toISOString()
 
@@ -25,10 +26,7 @@ export const seedCars: CarListing[] = [
       'Fog lamps',
       'ABS & VSC',
     ],
-    images: [
-      'https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=1200&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1200&auto=format&fit=crop&q=80',
-    ],
+    images: [MOCK_CAR_IMAGES.sedanSilver, MOCK_CAR_IMAGES.sedanBlack],
     featured: true,
     financeEligible: true,
     createdAt: now,
@@ -55,10 +53,7 @@ export const seedCars: CarListing[] = [
       'Heated seats',
       '360° camera',
     ],
-    images: [
-      'https://images.unsplash.com/photo-1519641471654-76ce947dedf6?w=1200&auto=format&fit=crop&q=80',
-      'https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?w=1200&auto=format&fit=crop&q=80',
-    ],
+    images: [MOCK_CAR_IMAGES.suvRed, MOCK_CAR_IMAGES.suvDark],
     featured: true,
     financeEligible: true,
     createdAt: now,
@@ -78,9 +73,7 @@ export const seedCars: CarListing[] = [
     description:
       'Symmetrical AWD with X-Mode — proven on murram and tarmac alike. Timing belt replaced at 85,000 km. Inspection welcome at our yard.',
     features: ['Symmetrical AWD', 'X-Mode', 'Roof rails', 'Side airbags', 'USB ports'],
-    images: [
-      'https://images.unsplash.com/photo-1609521263047-f8f205293f24?w=1200&auto=format&fit=crop&q=80',
-    ],
+    images: [MOCK_CAR_IMAGES.suvDark],
     featured: false,
     financeEligible: true,
     createdAt: now,
@@ -101,9 +94,7 @@ export const seedCars: CarListing[] = [
     description:
       'Hard-working double cab with tonneau cover and service records from Isuzu East Africa. Suitable for construction, farming, and family use.',
     features: ['4x4', 'Tonneau cover', 'Tow bar', 'Dual airbags', 'Diff lock'],
-    images: [
-      'https://images.unsplash.com/photo-1533473359331-0135ef1b58dd?w=1200&auto=format&fit=crop&q=80',
-    ],
+    images: [MOCK_CAR_IMAGES.pickupWhite],
     featured: true,
     financeEligible: true,
     createdAt: now,
@@ -123,9 +114,7 @@ export const seedCars: CarListing[] = [
     description:
       'Fuel-efficient city hatch with magic seats and compact footprint. Perfect first car or Uber-compliant unit (subject to NTSA checks).',
     features: ['Magic seats', 'Economy mode', 'CD player', 'Central locking'],
-    images: [
-      'https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=1200&auto=format&fit=crop&q=80',
-    ],
+    images: [MOCK_CAR_IMAGES.hatchWhite],
     featured: false,
     financeEligible: true,
     createdAt: now,
@@ -150,9 +139,7 @@ export const seedCars: CarListing[] = [
       'Parking sensors',
       'Cruise control',
     ],
-    images: [
-      'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1200&auto=format&fit=crop&q=80',
-    ],
+    images: [MOCK_CAR_IMAGES.luxuryBlack],
     featured: false,
     financeEligible: true,
     createdAt: now,

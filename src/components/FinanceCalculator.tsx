@@ -1,29 +1,62 @@
-import { useMemo, useState, type InputHTMLAttributes } from 'react'
+import { useEffect, useMemo, useState, type InputHTMLAttributes } from 'react'
+import { Link } from 'react-router-dom'
+import {
+  FINANCE_CHANNEL_LABEL,
+  FINANCE_DEFAULT_RATE,
+  FINANCE_DEPOSIT_RATE,
+  type FinanceChannel,
+} from '../config/finance'
 import { calculateFinance } from '../utils/finance'
 import { formatKes } from '../utils/format'
 
 interface FinanceCalculatorProps {
   initialPrice?: number
   compact?: boolean
+  defaultChannel?: FinanceChannel
+  showTermsLink?: boolean
 }
 
 export function FinanceCalculator({
   initialPrice = 2_000_000,
   compact = false,
+  defaultChannel = 'bank',
+  showTermsLink = true,
 }: FinanceCalculatorProps) {
+  const [channel, setChannel] = useState<FinanceChannel>(defaultChannel)
   const [vehiclePrice, setVehiclePrice] = useState(initialPrice)
-  const [downPayment, setDownPayment] = useState(Math.round(initialPrice * 0.2))
+  const [downPayment, setDownPayment] = useState(
+    Math.round(initialPrice * FINANCE_DEPOSIT_RATE[defaultChannel]),
+  )
   const [tradeIn, setTradeIn] = useState(0)
-  const [annualRate, setAnnualRate] = useState(14.5)
+  const [annualRate, setAnnualRate] = useState(FINANCE_DEFAULT_RATE[defaultChannel])
   const [termMonths, setTermMonths] = useState(48)
   const [registrationFees, setRegistrationFees] = useState(45_000)
   const [insuranceAnnual, setInsuranceAnnual] = useState(72_000)
+
+  const minDeposit = Math.round(vehiclePrice * FINANCE_DEPOSIT_RATE[channel])
+  const maxFinancePct =
+    channel === 'bank' ? '90%' : '70%'
+
+  useEffect(() => {
+    setAnnualRate(FINANCE_DEFAULT_RATE[channel])
+  }, [channel])
+
+  useEffect(() => {
+    setVehiclePrice(initialPrice)
+    setDownPayment(Math.round(initialPrice * FINANCE_DEPOSIT_RATE[channel]))
+  }, [initialPrice, channel])
+
+  function selectChannel(key: FinanceChannel) {
+    setChannel(key)
+    setDownPayment(Math.round(vehiclePrice * FINANCE_DEPOSIT_RATE[key]))
+    setAnnualRate(FINANCE_DEFAULT_RATE[key])
+  }
 
   const result = useMemo(
     () =>
       calculateFinance({
         vehiclePrice,
-        downPayment,
+        downPayment: Math.max(downPayment, minDeposit),
         tradeIn,
         annualRate,
         termMonths,
@@ -33,6 +66,7 @@ export function FinanceCalculator({
     [
       vehiclePrice,
       downPayment,
+      minDeposit,
       tradeIn,
       annualRate,
       termMonths,
@@ -42,17 +76,50 @@ export function FinanceCalculator({
   )
 
   return (
-    <div className="finance-calc-wrap">
+    <div className="finance-calc-wrap" id="finance-calculator">
       <header className="finance-calc__header">
         <h2>Vehicle finance estimator</h2>
         <p>
-          Illustration only — final rates depend on credit assessment, insurer
-          quotes, and NTSA fees. Ask our desk for a formal offer letter.
+          Choose bank or microfinance/SACCO path. Minimum deposit for bank partners
+          is <strong>10%</strong> of vehicle value; microfinance routes typically
+          require <strong>30%</strong> upfront. Figures are illustrative only.
         </p>
       </header>
 
+      {!compact && (
+        <img
+          className="finance-mock-banner"
+          src="/mock/showroom-hero.svg"
+          alt=""
+          aria-hidden
+        />
+      )}
+
+      <div className="finance-channel-toggle" role="tablist" aria-label="Finance type">
+        {(['bank', 'microfinance'] as const).map((key) => (
+          <button
+            key={key}
+            type="button"
+            role="tab"
+            aria-selected={channel === key}
+            className={channel === key ? 'is-active' : undefined}
+            onClick={() => selectChannel(key)}
+          >
+            <span>{FINANCE_CHANNEL_LABEL[key]}</span>
+            <small>
+              {Math.round(FINANCE_DEPOSIT_RATE[key] * 100)}% min. deposit · finance
+              up to {key === 'bank' ? '90%' : '70%'}
+            </small>
+          </button>
+        ))}
+      </div>
+
       <div className={compact ? 'finance-calc finance-calc--compact' : 'finance-calc'}>
         <fieldset className="finance-calc__fields">
+          <div className="deposit-hint">
+            Minimum deposit for this vehicle:{' '}
+            <strong>{formatKes(minDeposit)}</strong> ({maxFinancePct} max. finance)
+          </div>
           <Field
             label="Vehicle price (KES)"
             type="number"
@@ -66,7 +133,7 @@ export function FinanceCalculator({
             type="number"
             value={downPayment}
             onChange={(v) => setDownPayment(Number(v))}
-            min={0}
+            min={minDeposit}
             step={5000}
           />
           <Field
@@ -148,9 +215,14 @@ export function FinanceCalculator({
             <p className="muted">Enter valid amounts to see estimates.</p>
           )}
           <p className="finance-disclaimer">
-            Kenya market assumptions; not a binding quote under the CBK
-            consumer protection rules.
+            Kenya market assumptions; not a binding quote. Partner banks (e.g. Co-op
+            up to 80% finance) may differ from microfinance rules.
           </p>
+          {showTermsLink && (
+            <Link to="/finance/terms" className="btn btn--secondary btn--sm">
+              Read finance terms &amp; bank steps
+            </Link>
+          )}
         </aside>
       </div>
     </div>

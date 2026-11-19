@@ -1,83 +1,135 @@
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CarCard } from '../components/CarCard'
 import { FinanceCalculator } from '../components/FinanceCalculator'
+import { FINANCE_DEPOSIT_RATE } from '../config/finance'
+import { MOCK_CAR_IMAGES } from '../data/mockImages'
 import { useCars } from '../context/CarContext'
+import { formatKes } from '../utils/format'
 
 export function HomePage() {
   const { cars } = useCars()
   const featured = cars.filter((c) => c.featured).slice(0, 4)
+  const [showExitCta, setShowExitCta] = useState(false)
+
+  useEffect(() => {
+    document.documentElement.classList.add('home-scroll-active')
+    const onScroll = () => {
+      setShowExitCta(window.scrollY > window.innerHeight * 1.2)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    onScroll()
+    return () => {
+      document.documentElement.classList.remove('home-scroll-active')
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
 
   return (
-    <>
-      <section className="hero">
-        <div className="hero__bg" aria-hidden />
+    <div className="home-experience">
+      <a href="#featured" className="scroll-hint" aria-label="Scroll to explore">
+        <span>Explore the showroom</span>
+        <span className="scroll-hint__icon" aria-hidden>
+          ↓
+        </span>
+      </a>
+
+      <section className="home-panel hero hero--showcase">
+        <div
+          className="hero__bg hero__bg--mock"
+          style={{ backgroundImage: `url(${MOCK_CAR_IMAGES.showroom})` }}
+          aria-hidden
+        />
         <div className="container hero__content">
           <div className="hero__panel">
-            <p className="eyebrow">Nairobi · Inspected stock · In-house finance</p>
-            <h1>Find a car you trust — without the runaround.</h1>
+            <p className="eyebrow">Showroom preview · Red &amp; black edition</p>
+            <h1>Drive home the story before you open the catalogue.</h1>
             <p className="lead">
-              Facima Motors lists every unit with yard photos, mileage disclosure, and
-              optional finance from partner lenders. Inspired by transparent marketplaces
-              like CarDuka, built for buyers who read the fine print.
+              Stay on this page to compare finance paths, inspect mock yard shots, and
+              run real numbers. When you are ready, full inventory is one click away.
             </p>
             <div className="hero__actions">
-              <Link to="/inventory" className="btn btn--primary">
-                Browse {cars.length} vehicles
-              </Link>
-              <Link to="/finance" className="btn btn--secondary">
-                Estimate repayments
-              </Link>
+              <a href="#finance-paths" className="btn btn--primary">
+                Compare finance deposits
+              </a>
+              <a href="#calculator" className="btn btn--secondary">
+                Monthly payment estimate
+              </a>
             </div>
-            <dl className="hero__stats">
-              <div>
-                <dt>48h</dt>
-                <dd>Typical finance pre-approval</dd>
-              </div>
-              <div>
-                <dt>120+ point</dt>
-                <dd>Yard inspection checklist</dd>
-              </div>
-              <div>
-                <dt>Trade-in</dt>
-                <dd>Same-day valuation slots</dd>
-              </div>
-            </dl>
+            <p className="mock-label">All vehicle photos on this preview use Facima mock imagery.</p>
           </div>
-          <div className="hero__panel">
-            <form
-              className="hero-search"
-              onSubmit={(e) => {
-                e.preventDefault()
-                const data = new FormData(e.currentTarget)
-                const q = String(data.get('q') ?? '')
-                window.location.href = `/inventory?q=${encodeURIComponent(q)}`
-              }}
-            >
-              <label>
-                <span className="visually-hidden">Search stock</span>
-                <input
-                  name="q"
-                  type="search"
-                  placeholder="Try “Toyota Premio” or “4x4 diesel”"
-                />
-              </label>
-              <button type="submit" className="btn btn--primary">
-                Search inventory
-              </button>
-            </form>
+          <div className="hero__panel hero__panel--card">
+            <h2 className="hero-card__title">Quick stock glance</h2>
+            <ul className="hero-glance">
+              {featured.slice(0, 3).map((car) => (
+                <li key={car.id}>
+                  <img src={car.images[0]} alt="" />
+                  <div>
+                    <strong>
+                      {car.year} {car.make} {car.model}
+                    </strong>
+                    <span>{formatKes(car.price)}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
             <p className="hero-search__note">
-              Or call <a href="tel:+254712345678">+254 712 345 678</a> for a
-              curated shortlist.
+              Scroll for finance terms, then{' '}
+              <Link to="/inventory">view all {cars.length} listings</Link>.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="section container">
+      <section className="home-panel section--inset" id="finance-paths">
+        <div className="container">
+          <header className="section__head">
+            <h2>Two finance doors — one yard</h2>
+            <Link to="/finance/terms">Full terms &amp; bank steps →</Link>
+          </header>
+          <div className="finance-path-grid">
+            <div className="finance-path finance-path--bank">
+              <p className="finance-path__badge">Bank partner route</p>
+              <p className="finance-path__deposit">
+                From {Math.round(FINANCE_DEPOSIT_RATE.bank * 100)}% deposit
+              </p>
+              <p>
+                Co-op, NCBA, and similar lenders may finance up to 80–90% of value.
+                Facima&apos;s floor minimum is{' '}
+                <strong>10%</strong> cash or trade-in top-up on approved profiles.
+              </p>
+              <a href="#calculator" className="btn btn--primary btn--sm">
+                Estimate with 10% deposit
+              </a>
+            </div>
+            <div className="finance-path finance-path--mfi">
+              <p className="finance-path__badge">Microfinance / SACCO</p>
+              <p className="finance-path__deposit">
+                {Math.round(FINANCE_DEPOSIT_RATE.microfinance * 100)}% deposit
+              </p>
+              <p>
+                Faster files for SMEs and informal income. Expect{' '}
+                <strong>30%</strong> upfront before disbursement — ideal when you want
+                speed over the lowest rate.
+              </p>
+              <Link to="/finance" className="btn btn--secondary btn--sm">
+                Open full calculator
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="home-panel section container" id="featured">
         <header className="section__head">
-          <h2>Featured this week</h2>
-          <Link to="/inventory">View full stock →</Link>
+          <h2>Featured mock listings</h2>
+          <span className="mock-label">Preview imagery only</span>
         </header>
+        <div className="showcase-strip">
+          <img src={MOCK_CAR_IMAGES.suvRed} alt="" className="showcase-strip__wide" />
+          <img src={MOCK_CAR_IMAGES.luxuryBlack} alt="" />
+          <img src={MOCK_CAR_IMAGES.pickupWhite} alt="" />
+        </div>
         <div className="car-grid">
           {featured.map((car) => (
             <CarCard key={car.id} car={car} />
@@ -85,39 +137,72 @@ export function HomePage() {
         </div>
       </section>
 
-      <section className="section section--cream">
+      <section className="home-panel section section--dark">
         <div className="container split">
           <div>
-            <h2>How buying works</h2>
+            <h2>Yard process</h2>
             <ol className="steps">
               <li>
-                <strong>Reserve online or visit the yard</strong> — we hold the unit for
-                24 hours with a refundable deposit.
+                <strong>Walk the floor</strong> — every car on this site is photo-ready;
+                live units mirror these mock angles until your shoot day.
               </li>
               <li>
-                <strong>Independent inspection welcome</strong> — lift the car, scan OBD,
-                review import / logbook docs.
+                <strong>Pick bank or MFI path</strong> — deposits at 10% or 30% set how
+                much you finance.
               </li>
               <li>
-                <strong>Finance & NTSA transfer</strong> — we coordinate insurer quotes,
-                loan signing, and number plate collection.
+                <strong>Drive out</strong> — insurance, NTSA, and logbook handled with
+                partner checklists (see finance terms).
               </li>
             </ol>
           </div>
-          <div className="trust-card">
-            <h3>Why Facima?</h3>
+          <div className="trust-card trust-card--red">
+            <h3>Partners we mirror</h3>
             <ul>
-              <li>Every listing shows real yard photography (no stock renders).</li>
-              <li>Finance estimator with insurance and registration line items.</li>
-              <li>Sell or trade-in channel with transparent valuation notes.</li>
+              <li>Co-operative Bank asset finance (up to 80% bank financing)</li>
+              <li>NCBA online asset finance workflow</li>
+              <li>Microfinance &amp; SACCO channels at 30% deposit standard</li>
             </ul>
+            <Link to="/finance/terms" className="btn btn--primary btn--sm">
+              Read application instructions
+            </Link>
           </div>
         </div>
       </section>
 
-      <section className="section container">
-        <FinanceCalculator compact />
+      <section className="home-panel section container" id="calculator">
+        <FinanceCalculator compact showTermsLink />
       </section>
-    </>
+
+      <section className="home-panel section section--cta">
+        <div className="container home-exit">
+          <h2>Ready to leave the showroom?</h2>
+          <p>
+            You have seen deposits, mock stock, and repayment estimates. Continue to
+            inventory, sell/trade-in, or speak to the desk.
+          </p>
+          <div className="hero__actions">
+            <Link to="/inventory" className="btn btn--primary">
+              Open full inventory
+            </Link>
+            <Link to="/sell" className="btn btn--secondary">
+              Sell or trade-in
+            </Link>
+            <a href="tel:+254712345678" className="btn btn--ghost">
+              Call the yard
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {showExitCta && (
+        <aside className="home-floating-cta">
+          <span>Finished browsing the home experience?</span>
+          <Link to="/inventory" className="btn btn--primary btn--sm">
+            Go to inventory
+          </Link>
+        </aside>
+      )}
+    </div>
   )
 }

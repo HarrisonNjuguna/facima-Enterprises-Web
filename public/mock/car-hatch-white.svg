@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <rect width="800" height="600" fill="#111"/>
+  <text x="24" y="40" fill="#d90429" font-family="system-ui" font-size="14" font-weight="600">MOCK  HATCH</text>
+  <path d="M200 355h400l-35-95H235l-35 95z" fill="#f0f0f0"/>
+  <path d="M250 260h300l-28-55H278l-28 55z" fill="#e0e0e0"/>
+  <circle cx="270" cy="375" r="38" fill="#0a0a0a" stroke="#d90429" stroke-width="4"/>
+  <circle cx="530" cy="375" r="38" fill="#0a0a0a" stroke="#d90429" stroke-width="4"/>
+</svg>

@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { FinanceCalculator } from '../components/FinanceCalculator'
 
 export function FinancePage() {
@@ -11,9 +11,9 @@ export function FinancePage() {
       <header className="page-header">
         <h1>Car finance calculator</h1>
         <p className="lead">
-          Model monthly instalments before you visit the yard. Adjust deposit,
-          trade-in, term, and insurer figures to match your budget — similar to
-          finance tools on leading Kenyan marketplaces.
+          Bank finance from <strong>10%</strong> deposit; microfinance from{' '}
+          <strong>30%</strong>. Switch paths in the calculator, then read{' '}
+          <Link to="/finance/terms">Co-op &amp; NCBA steps</Link>.
         </p>
       </header>
       <FinanceCalculator initialPrice={initialPrice} />

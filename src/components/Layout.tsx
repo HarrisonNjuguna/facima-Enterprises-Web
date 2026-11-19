@@ -8,7 +8,7 @@ export function Layout() {
     <div className="app-shell">
       <Header />
       <InstallPwaBanner />
-      <main>
+      <main className="main-flow">
         <Outlet />
       </main>
       <Footer />

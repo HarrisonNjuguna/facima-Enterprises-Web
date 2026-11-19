@@ -21,6 +21,9 @@ export function Footer() {
               <Link to="/finance">Finance calculator</Link>
             </li>
             <li>
+              <Link to="/finance/terms">Finance terms (Co-op / NCBA)</Link>
+            </li>
+            <li>
               <Link to="/sell">Sell / trade-in</Link>
             </li>
           </ul>
